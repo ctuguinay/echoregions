@@ -67,10 +67,11 @@ include-package-data = true
 where = ["."]
 
 [tool.setuptools_scm]
-fallback_version = "unknown"
+fallback_version = "0.0.0.dev0"
 local_scheme = "no-local-version"
 write_to = "_echoregions_version.py"
 write_to_template = '__version__ = "{version}"\n'
+version_file_template = '__version__ = "{version}"\n'
 
 [tool.black]
 line-length = 100
