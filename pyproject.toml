@@ -1,8 +1,7 @@
 [build-system]
 requires = [
-    "setuptools>=69",
-    "setuptools_scm[toml]>=7",
-    "setuptools_scm_git_archive",
+    "setuptools>=75",
+    "setuptools_scm[toml]>=8",
     "wheel",
 ]
 build-backend = "setuptools.build_meta"
@@ -56,7 +55,6 @@ dependencies = [
 Homepage = "https://github.com/OSOceanAcoustics/echoregions"
 
 [project.optional-dependencies]
-
 dev = [
     "black",
     "flake8",
@@ -85,8 +83,6 @@ include = ["echoregions*"]
 [tool.setuptools_scm]
 fallback_version = "0.0.0.dev0"
 local_scheme = "no-local-version"
-write_to = "echoregions/_echoregions_version.py"
-write_to_template = '__version__ = "{version}"\n'
 
 [tool.black]
 line-length = 100
