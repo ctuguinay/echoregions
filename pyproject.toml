@@ -47,7 +47,7 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/OSOceanAcoustics/echoregions"
+Homepage = "https://github.com/echostack-org/echoregions"
 
 [project.optional-dependencies]
 dev = [

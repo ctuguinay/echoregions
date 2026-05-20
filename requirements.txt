@@ -1,7 +1,0 @@
-# This file is no longer needed and is kept for backward compatibility only.
-# All dependencies are now defined in pyproject.toml under [project.dependencies]
-# To install dependencies, use:
-#   pip install -e .
-# To install with docs dependencies, use:
-#   pip install -e ".[docs]"
-# This file can be safely deleted in a future release.

@@ -1,5 +1,0 @@
-# This file is no longer needed and is kept for backward compatibility only.
-# All dev dependencies are now defined in pyproject.toml under [project.optional-dependencies] dev
-# To install with dev dependencies, use:
-#   pip install -e ".[dev]"
-# This file can be safely deleted in a future release.
