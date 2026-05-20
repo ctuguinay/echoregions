@@ -1,9 +1,6 @@
 [build-system]
-requires = [
-    "setuptools>=75",
-    "wheel",
-]
-build-backend = "setuptools.build_meta"
+requires = ["uv_build"]
+build-backend = "uv_build"
 
 [project]
 name = "echoregions"
@@ -72,11 +69,9 @@ docs = [
     "docutils<0.18",
 ]
 
-[tool.setuptools]
-include-package-data = true
-
-[tool.setuptools.packages.find]
-include = ["echoregions*"]
+[tool.uv.build-backend]
+module-name = "echoregions"
+module-root = "."
 
 [tool.black]
 line-length = 100
