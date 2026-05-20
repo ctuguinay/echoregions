@@ -26,7 +26,7 @@ jobs:
         run: |
           sudo apt-get install libgeos-dev
           python -m pip install --upgrade pip
-          python -m pip install --upgrade setuptools wheel
+          python -m pip install --upgrade build
           pip install -r requirements-dev.txt
           pip install opencv-python
           pip install -e .
