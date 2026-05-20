@@ -1,10 +1,3 @@
-from __future__ import absolute_import, division, print_function
-
-from setuptools import setup
-
-# Dynamically read dependencies from requirements file
-with open("requirements.txt") as f:
-    requirements = f.readlines()
-
-if __name__ == "__main__":
-    setup(install_requires=requirements, version="0.2.3")
+# This file is no longer needed and is kept for backward compatibility only.
+# All configuration has been migrated to pyproject.toml
+# This can be safely deleted in a future release.

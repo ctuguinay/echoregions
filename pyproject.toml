@@ -1,4 +1,3 @@
-
 [build-system]
 requires = [
     "setuptools >= 48",
@@ -7,6 +6,65 @@ requires = [
     "wheel >= 0.29.0",
 ]
 build-backend = 'setuptools.build_meta'
+
+[project]
+name = "echoregions"
+description = "Parsers and functions for working with EVR and EVL files"
+readme = "README.md"
+requires-python = ">=3.11, <3.14"
+license = { text = "Apache License, Version 2.0" }
+authors = [
+    { name = "Caesar Tuguinay", email = "ctuguina@uw.edu" },
+]
+maintainers = [
+    { name = "Caesar Tuguinay", email = "ctuguina@uw.edu" },
+]
+keywords = []
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "numpy>=1.21.0",
+    "pandas",
+    "matplotlib",
+    "regionmask>=0.8.0",
+    "shapely>=2.0.0",
+    "zarr>=3",
+    "netcdf4",
+    "scipy",
+    "xarray>=2024.11.0",
+    "dask",
+]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/OSOceanAcoustics/echoregions"
+
+[project.optional-dependencies]
+docs = [
+    "sphinx_rtd_theme",
+    "sphinx-automodapi",
+    "sphinx-panels",
+    "jupyter-book<2.0",
+    "numpydoc",
+    "docutils<0.18",
+]
+
+[tool.setuptools]
+py-modules = ["_echoregions_version"]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
 
 [tool.setuptools_scm]
 fallback_version = "unknown"
