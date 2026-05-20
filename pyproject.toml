@@ -58,6 +58,16 @@ docs = [
     "numpydoc",
     "docutils<0.18",
 ]
+dev = [
+    "black",
+    "flake8",
+    "isort",
+    "pre-commit",
+    "pytest",
+    "pytest-cov",
+    "setuptools_scm",
+    "wheel",
+]
 
 [tool.setuptools]
 py-modules = ["_echoregions_version"]
