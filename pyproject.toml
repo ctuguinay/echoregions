@@ -70,7 +70,6 @@ dev = [
 ]
 
 [tool.setuptools]
-py-modules = ["_echoregions_version"]
 include-package-data = true
 
 [tool.setuptools.packages.find]
