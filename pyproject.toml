@@ -70,7 +70,7 @@ where = ["."]
 fallback_version = "unknown"
 local_scheme = "no-local-version"
 write_to = "_echoregions_version.py"
-write_to_template = 'version = "{version}"'
+write_to_template = '__version__ = "{version}"\n'
 
 [tool.black]
 line-length = 100
