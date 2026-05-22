@@ -1,25 +1,83 @@
-
 [build-system]
-requires = [
-    "setuptools >= 48",
-    "setuptools_scm[toml] >= 7",
-    "setuptools_scm_git_archive",
-    "wheel >= 0.29.0",
-]
-build-backend = 'setuptools.build_meta'
+requires = ["uv_build"]
+build-backend = "uv_build"
 
-[tool.setuptools_scm]
-fallback_version = "unknown"
-local_scheme = "no-local-version"
-write_to = "_echoregions_version.py"
-write_to_template = 'version = "{version}"'
+[project]
+name = "echoregions"
+version = "0.2.3"
+description = "Parsers and functions for working with EVR and EVL files"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = { text = "Apache License, Version 2.0" }
+
+authors = [
+    { name = "Caesar Tuguinay", email = "ctuguina@uw.edu" },
+]
+
+maintainers = [
+    { name = "Caesar Tuguinay", email = "ctuguina@uw.edu" },
+]
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering",
+]
+
+dependencies = [
+    "numpy>=1.21.0",
+    "pandas",
+    "matplotlib",
+    "regionmask>=0.8.0",
+    "shapely>=2.0.0",
+    "zarr>=3",
+    "netcdf4",
+    "scipy",
+    "xarray>=2024.11.0",
+    "dask",
+    "opencv-python",
+]
+
+[project.urls]
+Homepage = "https://github.com/echostack-org/echoregions"
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "flake8",
+    "isort",
+    "pre-commit",
+    "pytest",
+    "pytest-cov",
+    "build",
+]
+
+docs = [
+    "sphinx_rtd_theme",
+    "sphinx-automodapi",
+    "sphinx-panels",
+    "jupyter-book<2.0",
+    "numpydoc",
+    "docutils<0.18",
+]
+
+[tool.uv.build-backend]
+module-name = "echoregions"
+module-root = "."
 
 [tool.black]
 line-length = 100
 
 [tool.isort]
-known_first_party = "echoregions"
-known_third_party = ["_echoregions_version", "setuptools"]
+known_first_party = ["echoregions"]
 multi_line_output = 3
 include_trailing_comma = true
 force_grid_wrap = 0
