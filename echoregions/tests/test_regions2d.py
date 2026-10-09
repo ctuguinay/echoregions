@@ -1251,7 +1251,6 @@ def test_read_mask_returns_region_with_hole_contours() -> None:
 
     assert isinstance(regions2d, Regions2D)
 
-    """
     # Outer contour
     first_region = regions2d.select_region(region_id=1)
     assert first_region["region_id"].values == 1
@@ -1273,7 +1272,6 @@ def test_read_mask_returns_region_with_hole_contours() -> None:
         first_region["depth"],
         np.array([20.0, 70.0, 70.0, 20.0], dtype=float),
     )
-    """
 
     # Inner contour (hole)
     second_region = regions2d.select_region(region_id=2)
