@@ -113,6 +113,7 @@ class Regions2D:
             self.input_file = input_file
         elif input_type == "CSV":
             self.data = parse_regions_df(input_file)
+            self.input_file = input_file
         self.output_file = []
 
         self.min_depth = min_depth
