@@ -1069,9 +1069,9 @@ def test_within_transect_small_bbox_distance_threshold(da_Sv_fixture: DataArray)
 
 
 @pytest.mark.regions2d
-def test_evr_write(regions2d_fixture: Regions2D, da_Sv_fixture: DataArray) -> None:
+def test_to_evr(regions2d_fixture: Regions2D, da_Sv_fixture: DataArray) -> None:
     """
-    Tests evr_write functionality.
+    Tests to_evr functionality.
 
     Parameters
     ----------
@@ -1203,6 +1203,98 @@ def test_read_mask_returns_regions2d() -> None:
     assert np.array_equal(
         regions2d.data.iloc[0]["depth"],
         np.array([20.0, 30.0, 30.0, 20.0], dtype=float),
+    )
+
+@pytest.mark.test1
+@pytest.mark.regions2d
+def test_read_mask_returns_region_with_hole_contours() -> None:
+    """
+    Tests that read_mask builds a Regions2D object with separate outer and inner
+    contours when the mask contains a hole.
+    """
+    mask = xr.DataArray(
+        np.array(
+            [
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+                [0, 1, 0, 0, 0, 0, 0, 0, 1, 0],
+                [0, 1, 0, 0, 0, 0, 0, 0, 1, 0],
+                [0, 1, 0, 0, 1, 1, 0, 0, 1, 0],
+                [0, 1, 0, 0, 1, 1, 0, 0, 1, 0],
+                [0, 1, 0, 0, 0, 0, 0, 0, 1, 0],
+                [0, 1, 0, 0, 0, 0, 0, 0, 1, 0],
+                [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ]
+        ),
+        dims=("depth", "ping_time"),
+        coords={
+            "depth": [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0],
+            "ping_time": pd.to_datetime(
+                [
+                    "2026-01-01T00:00:00",
+                    "2026-01-01T00:00:10",
+                    "2026-01-01T00:00:20",
+                    "2026-01-01T00:00:30",
+                    "2026-01-01T00:00:40",
+                    "2026-01-01T00:00:50",
+                    "2026-01-01T00:01:00",
+                    "2026-01-01T00:01:10",
+                    "2026-01-01T00:01:20",
+                    "2026-01-01T00:01:30",
+                ]
+            ),
+        },
+    )
+
+    regions2d = er.read_mask(mask=mask, region_classification="test_class")
+
+    assert isinstance(regions2d, Regions2D)
+
+    """
+    # Outer contour
+    first_region = regions2d.select_region(region_id=1)
+    assert first_region["region_id"].values == 1
+    assert first_region["region_class"].values == "test_class"
+    assert first_region["region_name"].values == "test_class1"
+    assert np.array_equal(
+        first_region["time"],
+        np.array(
+            [
+                np.datetime64("2026-01-01T00:00:10"),
+                np.datetime64("2026-01-01T00:00:10"),
+                np.datetime64("2026-01-01T00:01:00"),
+                np.datetime64("2026-01-01T00:01:00"),
+            ],
+            dtype="datetime64[ns]",
+        ),
+    )
+    assert np.array_equal(
+        first_region["depth"],
+        np.array([20.0, 70.0, 70.0, 20.0], dtype=float),
+    )
+    """
+
+    # Inner contour (hole)
+    second_region = regions2d.select_region(region_id=2)
+    assert second_region["region_id"].values == 2
+    assert second_region["region_class"].values == "test_class"
+    assert second_region["region_name"].values == "test_class2"
+    assert np.array_equal(
+        second_region["time"],
+        np.array(
+            [
+                np.datetime64("2026-01-01T00:00:30"),
+                np.datetime64("2026-01-01T00:00:30"),
+                np.datetime64("2026-01-01T00:00:40"),
+                np.datetime64("2026-01-01T00:00:40"),
+            ],
+            dtype="datetime64[ns]",
+        ),
+    )
+    assert np.array_equal(
+        second_region["depth"],
+        np.array([40.0, 50.0, 50.0, 40.0], dtype=float),
     )
 
 
