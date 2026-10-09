@@ -222,9 +222,7 @@ def parse_mask(
     rows = []
 
     root_indices = [
-        idx
-        for idx, contour_hierarchy in enumerate(hierarchy)
-        if contour_hierarchy[3] == -1
+        idx for idx, contour_hierarchy in enumerate(hierarchy) if contour_hierarchy[3] == -1
     ]
 
     # Traverse hierarchy, but append every contour as its own region
@@ -294,10 +292,7 @@ def parse_mask(
 
     # Assign region_id only after duplicate removal
     df["region_id"] = range(1, len(df) + 1)
-    df["region_name"] = [
-        f"{region_classification}{region_id}"
-        for region_id in df["region_id"]
-    ]
+    df["region_name"] = [f"{region_classification}{region_id}" for region_id in df["region_id"]]
 
     return df
 
